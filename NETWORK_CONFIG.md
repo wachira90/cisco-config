@@ -1,7 +1,10 @@
 # switch 2950T-24
-#create vlan 
+
+````
+create vlan 
 config terminal 
 do sho r
+````
 
 ## ALL SWITCH
 
@@ -54,8 +57,6 @@ exit
 int f0/0 
 no shut
 ````
-
------------------
 
 ````
 router rip
@@ -252,7 +253,7 @@ network 192.168.30.0 0.0.0.255 area 1
 network 199.199.199.0 0.0.0.3 area 1
 ````
 
-(router5)
+## router5
 
 ````
 int g0/0
@@ -269,7 +270,7 @@ network 192.168.30.0 0.0.0.255 area 1
 network 199.199.199.0 0.0.0.3 area 1
 network 199.199.199.128 0.0.0.127 area 1
 ````
-//========end LAB3===============
+end LAB3
 
 ## utility command check
 
@@ -278,7 +279,7 @@ do sh ip  rou
 do sh vlan
 ````
 
-### show routing
+## show routing
 
 ````
 do sho ip ro
