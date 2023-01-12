@@ -1,10 +1,11 @@
-#switch 2950T-24
+# switch 2950T-24
 #create vlan 
 config terminal 
 do sho r
 
-//==========ALL SWITCH=============
+## ALL SWITCH
 
+````
 int vlan 10
 vlan 10
 int vlan 20
@@ -25,18 +26,21 @@ int g0/1
 switchport trunk allowed vlan 10,20,30
 switchport mode trunk
 exit
+````
+END ALL SWITCH
 
-//==========END ALL SWITCH=============
+LAB2  
 
-#LAB2  
+## switch3
 
-(switch3)
+````
 int g0/2
 switchport trunk allowed vlan 10,20,30,111
 switchport mode trunk
+````
+## router2
 
-(router2)
-
+````
 interface f0/0.10
 encapsulation dot1Q 10
 ip address 192.168.10.1 255.255.255.0
@@ -49,10 +53,11 @@ ip address 192.168.30.1 255.255.255.0
 exit
 int f0/0 
 no shut
+````
 
-//-----------------
+-----------------
 
-
+````
 router rip
 version 2
 network 192.168.10.0
@@ -62,12 +67,12 @@ network 199.199.199.0
 exit
 int f0/1
 no shut 
-
 ip address 199.199.199.1 255.255.255.252
+````
 
+## router3
 
-(router3)
-
+````
 int f0/0
 no shut
 ip address 199.199.199.2 255.255.255.252
@@ -82,26 +87,33 @@ exit
 int f0/1
 ip address 199.199.199.129 255.255.255.128
 no shut
+````
 
+## server1
 
-(server1)
+````
 ip = 199.199.199.199/255.255.255.128
 gw = 199.199.199.129
-//========END LAB2===============
+````
 
-//======LAB1=======
+END LAB2
 
-(switch1)
+LAB1
 
+## switch1
+
+````
 interface f0/23
 switchport access vlan 10
 
 interface f0/24
 switchport access vlan 20
+````
 
 
+## router 1
 
-(router 1)
+````
 int g0/1
 ip address 199.199.199.129 255.255.255.128
 no shutdown 
@@ -117,9 +129,11 @@ network 192.168.20.0 0.0.0.255 area 1
 network 192.168.30.0 0.0.0.255 area 1
 network 199.199.199.0 0.0.0.3 area 1
 network 199.199.199.128 0.0.0.127 area 1
+````
 
-(router 4 )
+## router 4
 
+````
 interface f0/0  => sw port (0/2)
 ip address 192.168.10.1 255.255.255.0
 no shut
@@ -137,12 +151,14 @@ router ospf 1
 network 192.168.10.0 0.0.0.255 area 1
 network 192.168.30.0 0.0.0.255 area 1
 network 199.199.199.0 0.0.0.3 area 1
+````
+END LAB1
 
-//========END LAB1===============
+LAB3
 
-//========LAB3===============
+## router5
 
-(router5)
+````
 int g0/1
 ip address 199.199.199.129 255.255.255.128
 no shut
@@ -156,11 +172,11 @@ network 199.199.199.0 0.0.0.3 area 1
 network 192.168.10.0 0.0.0.255 area 1
 network 192.168.20.0 0.0.0.255 area 1
 network 192.168.30.0 0.0.0.255 area 1
+````
 
-//--------------------------
+## switch5
 
-(switch5)
-
+````
 int vlan 10
 vlan 10
 int vlan 20
@@ -189,11 +205,12 @@ int g0/2   (to L3)
 switchport trunk allowed vlan 10,20,30,111
 switchport native vlan 111
 switchport mode trunk
+````
 
-//------------------------
 
-(Multilayer Switch0 L3)  
+## Multilayer Switch0 L3
 
+````
 vl 10
 vl 20
 vl 30
@@ -233,8 +250,11 @@ network 192.168.10.0 0.0.0.255 area 1
 network 192.168.20.0 0.0.0.255 area 1
 network 192.168.30.0 0.0.0.255 area 1
 network 199.199.199.0 0.0.0.3 area 1
+````
 
 (router5)
+
+````
 int g0/0
 ip address 199.199.199.2 255.255.255.252
 no shut
@@ -248,13 +268,18 @@ network 192.168.20.0 0.0.0.255 area 1
 network 192.168.30.0 0.0.0.255 area 1
 network 199.199.199.0 0.0.0.3 area 1
 network 199.199.199.128 0.0.0.127 area 1
-
+````
 //========end LAB3===============
 
-###====utility
+## utility command check
+
+````
 do sh ip  rou
-
 do sh vlan
+````
 
-#show routing
+### show routing
+
+````
 do sho ip ro
+````
